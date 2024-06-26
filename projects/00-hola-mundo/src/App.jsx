@@ -1,14 +1,14 @@
+import './App.css'
+import { TwitterFollowCard } from './TwitterFollowCard.jsx'
+const addAt = (userName) => `@${userName}`
+
 export function App () {
-    return(
-        <article>
-            <header>
-                <img src="https://unavatar.io/midudev" />
-            
-            <div>
-                <strong>Miguel Ángel Durán</strong>
-                <span>@midudev</span> 
-            </div>
-            </header>
-        </article>
+    return (
+        <section className="App">
+            <TwitterFollowCard isFollowing userName="midudev" name="Miguel Angel Durán"/>
+            <TwitterFollowCard isFollowing={false} userName="pheralb" name="Pablo Hernandez"/>
+            <TwitterFollowCard userName="elonmusk" name="Elon Musk"/>    
+        </section>
+        
     )
 }
