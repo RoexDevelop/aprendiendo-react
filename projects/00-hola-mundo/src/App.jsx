@@ -3,24 +3,28 @@ import { TwitterFollowCard } from './TwitterFollowCard.jsx'
 const addAt = (userName) => `@${userName}`
 
 export function App () {
-    const formatUserName = (userName) => `@$(userName)`
+    //const format = (userName) => `@$(userName)`
+
+    const formattedUserName = (<span>@{userName}</span>)
 
     return (
         <section className="App">
             <TwitterFollowCard
+            formattedUserName={format}
             isFollowing 
             userName="midudev" 
             name="Miguel Angel Durán"/>
 
-            <TwitterFollowCard 
+            <TwitterFollowCard
+            formattedUserName={format}
             isFollowing={false} 
-            userName="pheralb" 
+            userName="pheralb"
             name="Pablo Hernandez"/>
 
-            <TwitterFollowCard 
-            userName="elonmusk" 
-            name="Elon Musk"/>    
+            <TwitterFollowCard
+            formattedUserName={format}
+            userName="elonmusk"
+            name="Elon Musk"/>  
         </section>
-        
     )
 }
