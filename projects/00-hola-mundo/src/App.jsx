@@ -5,11 +5,13 @@ const addAt = (userName) => `@${userName}`
 export function App () {
     return (
         <section className="App">
-            <TwitterFollowCard isFollowing userName="midudev">
+            <TwitterFollowCard userName="midudev" initialIsFollowing ={true}>
                 Miguel Angel Durán
             </TwitterFollowCard>
 
-            <TwitterFollowCard isFollowing={false} userName="pheralb">
+            {/* Comentario dentro del render (no es lo ideal)*/}
+
+            <TwitterFollowCard userName="pheralb">
                 Pablo Hernandez
             </TwitterFollowCard>
             
