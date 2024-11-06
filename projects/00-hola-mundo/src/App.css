@@ -12,6 +12,16 @@
     gap: 4px
   }
   
+  .tw-followCard-stopFollow{
+    padding:2px;
+    border: 1px;
+    color:#000;
+    font-family: 'Courier New';
+    color: #bbb;
+    padding-top: 34px;
+  }
+  
+
   .tw-followCard-info {
     display: flex;
     flex-direction: column;

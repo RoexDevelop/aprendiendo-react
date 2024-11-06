@@ -4,13 +4,13 @@ export function TwitterFollowCard ({ children, userName = 'unknown', initialIsFo
   const imageSrc = `https://unavatar.io/${userName}`;
   const [isFollowing, setIsFollowing] = useState(initialIsFollowing)
 
- 
+
     const addAt = (userName) => `@${userName}`
     const text = isFollowing ? 'Siguiendo' : 'Seguir'
     const buttonClassName = isFollowing
         ? 'tw-followCard-button is-following'
         : 'tw-followCard-button'
-    
+
     const handleClick = () => {
         setIsFollowing(!isFollowing)
     }
@@ -34,5 +34,6 @@ export function TwitterFollowCard ({ children, userName = 'unknown', initialIsFo
                 </button>
             </aside>
         </article>
+        
     )
 }

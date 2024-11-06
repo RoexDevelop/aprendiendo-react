@@ -95,7 +95,7 @@ function App() {
           })
         }
       </section>
-
+      
       <section className='turn'>
         <Square isSelected = {turn === TURNS.X}>
           {TURNS.X}
