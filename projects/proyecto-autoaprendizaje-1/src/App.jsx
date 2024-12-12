@@ -1,9 +1,21 @@
 import './App.css' //Alinear elementos con flex (practicar)
+import './data.js'
+import { sculptureList } from './data.js';
+import { useState } from 'react'; //Importar la variable de estado useState
 
+//&& --> El operador lógico AND (&&) evalúa operandos de izquierda a derecha, 
+//regresando inmediatamente el valor del primer operando falsy que encuentre; si todos los 
+//valores son truthy, el valor del último operando es retornado.
 const user = {
     name: 'Hedy Lamarr',
     imageUrl: 'https://i.imgur.com/yXOvdOSs.jpg'
 }
+
+const products = [
+    { title: 'Col', id: 1 },
+    { title: 'Ajo', id: 2 },
+    { title: 'Manzana', id: 3 }
+]
 
 function Cat() {
     return(
@@ -20,7 +32,89 @@ function Mybutton (){
     );
 }
 
+function Loggin (){
+    let content;
+    let isLoggedIn = true;
+    if (isLoggedIn) {
+        content = "Yes, he is logged in";
+    } else {
+        content = "NO he isn't logged in"
+    }
+
+    return(
+        <div>
+            {content}
+        </div>
+    )
+}
+
+function ListaProductos(){
+    const listItems = products.map(product => 
+        <li key={ListaProductos.id}>
+            {product.title}
+        </li>
+    )
+    return( <ul>{listItems}</ul> )
+}
+
+function MyButton(){
+    function handleClick(){
+        alert('ME HICISTE CLICK!')
+    }
+    
+    return(
+        <button onClick={handleClick}>
+            Hazme Click!
+        </button>
+    )
+}
+
+function Gallery(){
+    //let index = 0;
+    const [index, setIndex] = useState(0); // Añadir use state
+    
+    
+    function handleClick(){
+        (index >= 11)? (alert('No hay más artículos ')):(setIndex(index + 1));
+        console.log('continued' + index)
+    }
+    function handleClickBack(){
+        (index <= 0)? (alert('No hay más artículos ')):(setIndex(index - 1));
+        
+        console.log('backed' + index)
+    }
+
+    let sculpture = sculptureList[index];
+
+    return (
+        <>
+            <button onClick={handleClickBack}>
+                Atras
+            </button>
+            <button onClick={handleClick}>
+                Siguiente
+            </button>
+            <h2>
+                <i>{sculpture.name}</i>
+                por {sculpture.artist}
+            </h2>
+            <h3>
+                ({index + 1} de {sculptureList.length})
+            </h3>
+            <img 
+                src={sculpture.url} 
+                alt={sculpture.alt} 
+            />
+            <p>
+                {sculpture.description}
+            </p>
+        </>
+    )
+}
+
+
 export function App() { //Función principal
+    let isLoggedIn = false;
     return(
         
         <main>
@@ -59,6 +153,31 @@ export function App() { //Función principal
                 className= 'avatar'
                 src={user.imageUrl} 
                 alt={'Foto de ' + user.name} />
+                <br />
+            <h2>Renderizado condicional</h2>
+            {<Loggin />}
+            {/**Operdor ternario */}
+            
+            <div>
+                {isLoggedIn ? 
+                    (<h5>Yes, logged in</h5>)
+                    :
+                    (<h5>No, not logged in :(</h5>)
+                }
+            </div>
+            <div>{isLoggedIn && TRUE}</div>
+            <h2>Renderizado de listas (bucle FOR y funcion MAP())</h2>
+            <ListaProductos />
+            <h2>Responder a Eventos</h2>
+            <MyButton />
+            <h2>El estado(variable de estado)</h2>
+            <p>los componentes deben «recordar» cosas: el campo de texto, la imagen actual, el carrito de compras.</p>
+            <Gallery />
+            <h2>USE STATE</h2>
+
+            <h2>Actualizar la pantalla (useState)</h2>
+            <h2>Local Storage</h2>
+            
         </main>
     );
 }
