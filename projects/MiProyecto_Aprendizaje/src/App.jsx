@@ -23,17 +23,29 @@ export function App(){
                 Eliminar
             </button>
             <br />
-            <h2>Hola, {(nameLocalStorage === null)? inputName: nameLocalStorage}</h2>
+            <h2>Hola, {nameLocalStorage === null ? inputName : nameLocalStorage}</h2>
         </>
     )
 }
 
 //COMPONENTE QUE AÑADE UN NOMBRE A LOCAL STORAGE
 function SaveNameLocalStorage(keyName, value){
-    (!value)?alert("No hay nada escrito"):(localStorage.setItem(keyName, value), alert("Se ha añadido a local storage"))
+    if (!value) {
+        alert("No hay nada escrito")
+    } else {
+        localStorage.setItem(keyName, value)
+        alert("Se ha añadido a local storage")
+    }
 }
 
 //COMPONENTE QUE ELIMINA UN NOMBRE DE LOCAL STORAGE
-function DeleteNameLocalStorage(keyName){
-    (localStorage.getItem(keyName) === null)?alert("No hay nada en local storage"):(localStorage.removeItem(keyName), alert("Se ha eliminado de local storage"))
+function DeleteNameLocalStorage(){
+    const keyName = 'name'
+    
+    if (localStorage.getItem(keyName) === null) {
+        alert("No hay nada en local storage")
+    } else {
+        localStorage.removeItem(keyName)
+        alert("Se ha eliminado de local storage")
+    }
 }
