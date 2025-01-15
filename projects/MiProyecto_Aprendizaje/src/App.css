@@ -3,6 +3,11 @@ body{
     color: white;
 }
 
-.validation{
-    
+
+.userExistTrue{
+    color:rgb(46, 184, 46);
+}
+
+.userExistFalse{
+    color:crimson;
 }

@@ -1,14 +1,39 @@
 import './App.css'
 import { useState } from 'react'
 
-export function App(){
+export function App() {
     const [inputName, setInputName] = useState('')
     const keyName = 'name'
     const nameLocalStorage = localStorage.getItem(keyName)
+    const [textConfirmation, setTextConfirmation] = useState("")
+    const [userExist, setUserExist] = useState(false)
 
-    
+    //COMPONENTE QUE AÑADE UN NOMBRE A LOCAL STORAGE
+    function saveNameLocalStorage(keyName, value) {
+        if (!value) {
+            setTextConfirmation("Campo vacío")
+            return setUserExist(false)
+            
+        } else {
+            localStorage.setItem(keyName, value)
+            setTextConfirmation("Usuario Añadido")
+            return setUserExist(true)
+        }
+    }
 
-    return(
+    //COMPONENTE QUE ELIMINA UN NOMBRE DE LOCAL STORAGE
+    function deleteNameLocalStorage() {
+        if (localStorage.getItem("name") === null) {
+            setTextConfirmation("No hay nada en local storage")
+            return setUserExist(false)
+        } else {
+            localStorage.removeItem("name")
+            setTextConfirmation("Se ha eliminado de local Storage")
+            return setUserExist(true)
+        }
+    }
+
+    return (
         <>
             <h1>Local Storage</h1>
             <h3>Introduce tu nombre</h3>
@@ -16,36 +41,27 @@ export function App(){
                 onChange={e => setInputName(e.target.value)}
                 placeholder='Name'
             />
-            <button onClick={() => SaveNameLocalStorage(keyName, inputName)}>
+            <button onClick={() => saveNameLocalStorage(keyName, inputName)}>
                 Añadir
             </button>
-            <button onClick={() => DeleteNameLocalStorage("name")}>
+            <button onClick={() => deleteNameLocalStorage()}>
                 Eliminar
             </button>
             <br />
             <h2>Hola, {nameLocalStorage === null ? inputName : nameLocalStorage}</h2>
+
+            
+            {
+            userExist ? 
+                <h3 className="userExistTrue">{`${textConfirmation}`}</h3>
+                        : 
+                <h3 className="userExistFalse">{`${textConfirmation}`}</h3>
+            }
+            
         </>
     )
 }
 
-//COMPONENTE QUE AÑADE UN NOMBRE A LOCAL STORAGE
-function SaveNameLocalStorage(keyName, value){
-    if (!value) {
-        alert("No hay nada escrito")
-    } else {
-        localStorage.setItem(keyName, value)
-        alert("Se ha añadido a local storage")
-    }
-}
 
-//COMPONENTE QUE ELIMINA UN NOMBRE DE LOCAL STORAGE
-function DeleteNameLocalStorage(){
-    const keyName = 'name'
-    
-    if (localStorage.getItem(keyName) === null) {
-        alert("No hay nada en local storage")
-    } else {
-        localStorage.removeItem(keyName)
-        alert("Se ha eliminado de local storage")
-    }
-}
+
+
