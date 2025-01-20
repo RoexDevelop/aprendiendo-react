@@ -7,6 +7,7 @@ export function App() {
     const nameLocalStorage = localStorage.getItem(keyName)
     const [textConfirmation, setTextConfirmation] = useState("")
     const [userExist, setUserExist] = useState(false)
+    const [desapearText, setDesapearText] = useState("Desaparecer el texto")
 
     //COMPONENTE QUE AÑADE UN NOMBRE A LOCAL STORAGE
     function saveNameLocalStorage(keyName, value) {
@@ -33,6 +34,24 @@ export function App() {
         }
     }
 
+    {/*function desaparecerPrueba (){
+        setTimeout(() => {
+            console.log("han pasado 3 segundos")
+            setDesapearText("")
+        },3000);
+    }
+    */}
+
+    function checkText (){
+        if (textConfirmation.length > 1) {
+            setTimeout(() => {
+                console.log("Han pasado 3 segundos")
+                setTextConfirmation("")
+            }, 3000);
+            
+        }
+    }
+
     return (
         <>
             <h1>Local Storage</h1>
@@ -53,10 +72,19 @@ export function App() {
             
             {
             userExist ? 
-                <h3 className="userExistTrue">{`${textConfirmation}`}</h3>
+                <h3 id='userTrue' className="userExistTrue">{`${textConfirmation}`}</h3>
                         : 
                 <h3 className="userExistFalse">{`${textConfirmation}`}</h3>
             }
+
+            {checkText()}
+
+            
+            <h3 className='desaparicion'>Prueba de desaparición</h3>
+            
+            {/* <button onClick={desaparecerPrueba}>Boton desaparecer</button>
+            <h4 id='desapearTxt'>{`${desapearText}`}</h4> */ }
+
             
         </>
     )

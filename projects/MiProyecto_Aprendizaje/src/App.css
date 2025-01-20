@@ -6,8 +6,20 @@ body{
 
 .userExistTrue{
     color:rgb(46, 184, 46);
+    opacity: 100%;
 }
 
 .userExistFalse{
     color:crimson;
+    opacity: 100%;
+}
+
+.desaparicion{
+    color: rgb(141, 141, 243);
+    display: none;
+    transition: opacity 0.5s, display 0.5s;
+}
+
+#desapearTxt{
+    color:rgb(228, 180, 21);
 }
