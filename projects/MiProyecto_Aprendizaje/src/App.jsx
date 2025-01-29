@@ -7,11 +7,17 @@ export function App() {
     const nameLocalStorage = localStorage.getItem(keyName)
     const [textConfirmation, setTextConfirmation] = useState("")
     const [userExist, setUserExist] = useState(false)
-    const [userChecked, setUserChecked] = useState(false)
     
+    {/** Hook que chequea si el texto de confirmación se activa para deshacerlo a los 3 segundos */}
     useEffect(() => {
         console.log("Ha cambiado el useEffect")
-    }, [inputName])
+        if (textConfirmation.length) { {/** --> Si tiene texto es true. De lo contrario false  */}
+            setTimeout(() => {
+                console.log("Han pasado 3 segundos")
+                setTextConfirmation("")
+            }, 3000);
+        }
+    }, [textConfirmation])
 
     //COMPONENTE QUE AÑADE UN NOMBRE A LOCAL STORAGE
     function saveNameLocalStorage(keyName, value) {
@@ -38,16 +44,6 @@ export function App() {
         }
     }
 
-
-    function checkText (){
-        if (textConfirmation.length) {
-            setTimeout(() => {
-                console.log("Han pasado 3 segundos")
-                setTextConfirmation("")
-            }, 3000);
-        }
-    }
-
     return (
         <>
             <h1>Local Storage</h1>
@@ -71,9 +67,7 @@ export function App() {
                         : 
                 <h3 className="userExistFalse">{`${textConfirmation}`}</h3>
             }
-            
-            {checkText()}
-            
+
         </>
     )
 }
