@@ -10,7 +10,7 @@ export function App() {
     
     {/** Hook que chequea si el texto de confirmación se activa para deshacerlo a los 3 segundos */}
     useEffect(() => {
-        console.log("Ha cambiado el useEffect")
+        console.log("Se ha ejecutado el useEffect")
         if (textConfirmation.length) { {/** --> Si tiene texto es true. De lo contrario false  */}
             setTimeout(() => {
                 console.log("Han pasado 3 segundos")
