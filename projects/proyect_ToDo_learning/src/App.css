@@ -1,0 +1,9 @@
+body{
+    background-color: rgb(65, 63, 63);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.trash{
+    cursor: pointer;
+}
