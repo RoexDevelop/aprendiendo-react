@@ -19,21 +19,41 @@ export function App() {
                 ...listThings, // --> OPERADOR DE PROPAGACIÓN, añade al final de la lista un elemento
                 { id: nextId++, name: inputName }
             ])
+            setInputName("")
         } else {
             alert("no hay nada")
         }
     }
 
-    function deleteThingFromList(){
-
+    {/**Elimina un elemento de la lista */}
+    function deleteThingFromList(idBtn) {
+        setListThings(listThings.filter(a => {
+            console.log(a)
+            return a.id !== idBtn
+        }
+        ))
+        
     }
 
-    function showList(){
-        return (<ul>
+    function showList() {
+        return(<div >
             {listThings.map(thing => (
-                <li key={thing.id}>{thing.name} </li>
+                <div className="card">
+                    <p id={thing.id}>{thing.name}</p>
+                    <button 
+                        id={thing.id}
+                        onClick={() => deleteThingFromList(thing.id)}>
+                            Eliminar
+                    </button>
+                    <button id={thing.id}>Editar</button>
+                </div>
+                
             ))}
-        </ul>)
+        </div>)
+    }
+
+    function showListEdit(){
+
     }
 
     return (
@@ -45,11 +65,10 @@ export function App() {
                 onChange={e => setInputName(e.target.value)}
             />
             <button onClick={addThingToList}>Añadir</button>
-            <button>Eliminar</button>
 
             {/** Actualiza la lista para mostrarla dinámicamente */}
             {showList()}
-            
+
         </>
     )
 }
