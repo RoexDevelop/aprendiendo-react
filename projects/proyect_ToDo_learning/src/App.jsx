@@ -11,11 +11,21 @@ export function App() {
 
     const [inputName, setInputName] = useState()
     const [listThings, setListThings] = useState([])
-    const [inputEditName, setinputEditName] = useState()
+    //const [inputEditName, setinputEditName] = useState()
+    const [checkEditId, setCheckEditId] = useState()
 
     useEffect(() => {
-        setIsEditingCard(true)
-    }, [listThings])
+        if (checkEditId) { //Si la variable tiene un valor...
+            listThings.forEach(element => {
+                if (element.id === checkEditId) {
+                    console.log(checkEditId)
+                    element.editingCard = true
+                }
+            });
+            
+        }
+        setCheckEditId() //Limpiar el buffer de la varieblle
+    }, [listThings, checkEditId])
 
 
 
@@ -118,8 +128,7 @@ export function App() {
             
             {/** Actualiza la lista para mostrarla dinámicamente */}
             <br />
-            {console.log(listThings)}
-            {/**isEditingCard ? showListEdit() : showList()**/}
+            {/**Mostrar por pantalla la lista dinámica**/}
             {listThings.map(thing => 
             
             thing.editingCard ? 
@@ -139,13 +148,10 @@ export function App() {
                         onClick={() => deleteThingFromList(thing.id)}>
                         Eliminar
                     </button>
-                    <button id={thing.id} onClick={() => setIsEditingCard(true)}>Editar</button>
+                    <button id={thing.id} onClick={() => setCheckEditId(thing.id)}>Editar</button>
                 </div>)
-                
-
-            
-        )}
-            
+            )}
+            {console.log(listThings)}
         </>
     )
 }
