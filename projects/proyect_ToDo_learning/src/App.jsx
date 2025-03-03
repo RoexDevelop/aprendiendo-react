@@ -10,30 +10,47 @@ export function App() {
     const [isEditingCard, setIsEditingCard] = useState(false)
 
     const [inputName, setInputName] = useState()
+    const [inputSaveName, setInputSaveName] = useState()
     const [listThings, setListThings] = useState([])
     //const [inputEditName, setinputEditName] = useState()
-    const [checkEditId, setCheckEditId] = useState()
+    const [checkId, setCheckId] = useState()
+    const [idNuevoCambio, setNuevoCambio] = useState()
+
 
     useEffect(() => {
         
+        //Cambio de diseño en elementos de editar         
+        const newListOfThings = listThings.map(thing => {
+            if (thing.id === checkId) {
+                
+                (thing.editingCard == false) ? (thing.editingCard = true) : (thing.editingCard = false)
+            }
+            return thing
+        });
+        setCheckId() //Limpiar el buffer del Use State
         
-            const newListOfThings = listThings.map(thing => {
-                console.log("Te amo -->", {checkEditId})
-                if (thing.id === checkEditId) {
-                    console.log("test",checkEditId)
-                    if (thing.editingCard == false) {
-                        thing.editingCard = true
-                    }else{
-                        thing.editingCard = false
-                    }
+        setListThings(newListOfThings) //Asignar la nueva lista en mi lista primaria
+        
+        if (idNuevoCambio !== undefined) {
+            console.log("testttttt --> ", {checkEditId: checkId, listThings, newListOfThings, idNuevoCambio})
+            console.log("Dentro del proceso de cambiar de nombre un elemeto --> ", inputSaveName)
+            const listSaveOfThings = listThings.map(thing => {
+                if (thing.id === idNuevoCambio) {
+                    console.log("nombre del input -->", inputSaveName)
+                    thing.name = inputSaveName
+                    thing.editingCard = false
                 }
                 return thing
             });
-            setCheckEditId() //Limpiar el buffer del Use State
-            console.log("testttttt --> ", {checkEditId, listThings, newListOfThings})
-            setListThings(newListOfThings)
-       
-    }, [checkEditId])
+            console.log({listSaveOfThings})
+            setListThings(listSaveOfThings)
+            setNuevoCambio() //Limpiar el buffer del useState nuevoCambio
+
+        }
+
+    
+    }, [checkId, idNuevoCambio])
+
 
 
 
@@ -125,15 +142,16 @@ export function App() {
                 (<div className="card">
                     <input
                         id={thing.id}
-                        onChange={e => setInputName(e.target.value)}
-                        placeholder={thing.name}
+                        type="text"
+                        defaultValue={thing.name}
+                        onChange={e => setInputSaveName(e.target.value)}
                     />
                     <button
                         id={thing.id}
-                        onClick={() => deleteThingFromList(thing.id)}>
+                        onClick={() => setNuevoCambio(thing.id)}>
                         Guardar
                     </button>
-                    <button id={thing.id} onClick={() => setCheckEditId(thing.id)}>Canelar</button>
+                    <button id={thing.id} onClick={() => setCheckId(thing.id)}>Canelar</button>
                 </div>) :
                 (<div className="card">
                     <p>{thing.name}</p>
@@ -142,7 +160,7 @@ export function App() {
                         onClick={() => deleteThingFromList(thing.id)}>
                         Eliminar
                     </button>
-                    <button id={thing.id} onClick={() => setCheckEditId(thing.id)}>Editar</button>
+                    <button id={thing.id} onClick={() => setCheckId(thing.id)}>Editar</button>
                 </div>)
             )}
         </>
