@@ -32,17 +32,14 @@ export function App() {
         setListThings(newListOfThings) //Asignar la nueva lista en mi lista primaria
         
         if (idNuevoCambio !== undefined) {
-            console.log("testttttt --> ", {checkEditId: checkId, listThings, newListOfThings, idNuevoCambio})
-            console.log("Dentro del proceso de cambiar de nombre un elemeto --> ", inputSaveName)
+            console.log("testttttt --> ", {checkEditId: checkId, listThings, newListOfThings, idNuevoCambio, inputSaveName})
             const listSaveOfThings = listThings.map(thing => {
                 if (thing.id === idNuevoCambio) {
-                    console.log("nombre del input -->", inputSaveName)
                     thing.name = inputSaveName
                     thing.editingCard = false
                 }
                 return thing
             });
-            console.log({listSaveOfThings})
             setListThings(listSaveOfThings)
             setNuevoCambio() //Limpiar el buffer del useState nuevoCambio
 
@@ -125,9 +122,10 @@ export function App() {
 
     return (
         <>
-            <h1>PROYECTO TO DO</h1>
-            <h2>Introduce una tarea</h2>
+            <h1 class="text-2xl font-bold underline">PROYECTO TO DO</h1>
+            <h2 class="font-bold">Introduce una tarea</h2>
 
+            
             <input
                 onChange={e => setInputName(e.target.value)}
             />
