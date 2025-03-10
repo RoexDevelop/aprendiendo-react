@@ -166,13 +166,15 @@ export function App() {
             )}
 
             <h2 class="text-2xl text-pink-500">Tailwind testing</h2>
-            <div class="flex bg-white text-black h-8">
-                <div class="w-14 flex-none bg-cyan-500 flex justify-center algin-center border-2 border-none rounded-sm">01</div>
-                <div class="w-64 flex-1 bg-cyan-600 flex justify-center border-2 border-none rounded-sm">02</div>
-                <div class="w-32 flex 1 bg-cyan-700 flex justify-center border-2 border-none rounded-sm">03</div>
+            <div class="flex bg-white text-black h-8"> {/**h --> height */}
+                <div class="w-14 flex-none bg-cyan-500 flex justify-center items-center border-2 border-none rounded-sm">01</div>
+                <div class="w-64 flex-1 bg-cyan-600 flex justify-center items-center border-2 border-none rounded-sm">02</div>
+                <div class="w-32 flex 1 bg-cyan-700 flex justify-center items-center border-2 border-none rounded-sm">03</div>
             </div>
-            <div class="flex">
-
+            <div class="flex bg-white text-black h-8 mt-5">
+            <div class="w-14 flex-none bg-cyan-500 flex justify-center items-center border-2 border-none rounded-sm">01</div>
+                <div class="w-64 flex-1 bg-cyan-600 flex justify-center items-center border-2 border-none rounded-sm">02</div>
+                <div class="w-32 flex 1 bg-cyan-700 flex justify-center items-center border-2 border-none rounded-sm">03</div>
             </div>
         </>
     )
