@@ -122,13 +122,16 @@ export function App() {
 
     return (
         <>
+        
             <h1 class="text-2xl font-bold underline">PROYECTO TO DO</h1>
             <h2 class="font-bold">Introduce una tarea</h2>
 
             
             <input
-                onChange={e => setInputName(e.target.value)}
-            />
+            onChange={e => setInputName(e.target.value)} 
+            class=" bg-white placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+            
+        </input>
             <button onClick={addThingToList}>Añadir</button>
             
             {/** Actualiza la lista para mostrarla dinámicamente */}
@@ -161,6 +164,16 @@ export function App() {
                     <button id={thing.id} onClick={() => setCheckId(thing.id)}>Editar</button>
                 </div>)
             )}
+
+            <h2 class="text-2xl text-pink-500">Tailwind testing</h2>
+            <div class="flex bg-white text-black h-8">
+                <div class="w-14 flex-none bg-cyan-500 flex justify-center algin-center border-2 border-none rounded-sm">01</div>
+                <div class="w-64 flex-1 bg-cyan-600 flex justify-center border-2 border-none rounded-sm">02</div>
+                <div class="w-32 flex 1 bg-cyan-700 flex justify-center border-2 border-none rounded-sm">03</div>
+            </div>
+            <div class="flex">
+
+            </div>
         </>
     )
 }
