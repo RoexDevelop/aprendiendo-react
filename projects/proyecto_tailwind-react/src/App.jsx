@@ -3,18 +3,35 @@ import "./App.css"
 // https://cataas.com/cat
 //ENDPOINT DE GATOS RANDOM --> https://api.chucknorris.io/jokes/random
 const ENDPOINT = 'https://dog.ceo/api/breeds/image/random'
+const requestOptions = {
+  method: "GET",
+  redirect: "follow"
+};
 export function App(){
     const [fact, setFact] = useState()
+    const endpointsImages = []
 
     useEffect(() => {
+        
+        console.log("Tamaño de array: ",endpointsImages.length )
         fetch(ENDPOINT)
             .then(res => res.json())
             .then(data => setFact(data.message))
-    }, [])
+            for (let index = 0; index < 10; index++) {
+            
+            endpointsImages.push(fact)
+        }
+        /*fetch("https://dog.ceo/api/breeds/image/random", requestOptions)
+            .then((response) => setFact(response.text()))
+            .then((result) => console.log(result))
+            .catch((error) => console.error("Catch error -->" + error));*/
+    }, []);
     return (
         
         <div className="flex flex-col text-white bg-gray-800 min-h-screen ">
-            <p>{fact}</p>
+            <p>{fact}{console.log(endpointsImages)}</p>
+            <img src={endpointsImages[1]} alt="foto perro" />
+            <img src={fact} alt="foto perro" />
             
             {/**Barra de navegación */}
             <nav className="flex flex-row justify-center py-3">
