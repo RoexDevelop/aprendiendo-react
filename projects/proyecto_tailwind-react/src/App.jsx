@@ -3,35 +3,53 @@ import "./App.css"
 // https://cataas.com/cat
 //ENDPOINT DE GATOS RANDOM --> https://api.chucknorris.io/jokes/random
 const ENDPOINT = 'https://dog.ceo/api/breeds/image/random'
-const requestOptions = {
-  method: "GET",
-  redirect: "follow"
-};
 export function App(){
-    const [fact, setFact] = useState()
-    const endpointsImages = []
 
-    useEffect(() => {
-        
-        console.log("Tamaño de array: ",endpointsImages.length )
-        fetch(ENDPOINT)
-            .then(res => res.json())
-            .then(data => setFact(data.message))
-            for (let index = 0; index < 10; index++) {
-            
-            endpointsImages.push(fact)
+    const [imagenes, setImagenes] = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchDogs = async () => {
+      try {
+        const fetchPromises = [];
+
+        for (let i = 0; i < 10; i++) {
+          const promise = fetch("https://dog.ceo/api/breeds/image/random")
+            .then(res => {
+              if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+              return res.json();
+            })
+            .then(data => data.message) // la imagen viene en el campo 'message'
+            .catch(error => {
+              console.error(`Error en fetch ${i}:`, error);
+              return null;
+            });
+          fetchPromises.push(promise);
         }
-        /*fetch("https://dog.ceo/api/breeds/image/random", requestOptions)
-            .then((response) => setFact(response.text()))
-            .then((result) => console.log(result))
-            .catch((error) => console.error("Catch error -->" + error));*/
-    }, []);
+
+        const resultados = await Promise.all(fetchPromises);
+        setImagenes(resultados);
+      } catch (e) {
+        console.error("Error general:", e);
+        setError(e.message);
+      } finally {
+        setCargando(false);
+      }
+    };
+
+    fetchDogs();
+  }, []); // se ejecuta una sola vez al montar el componente
+  if (cargando) return <p>Cargando imágenes de perritos...</p>;
+  if (error) return <p>Ocurrió un error: {error}</p>;
     return (
         
+        
         <div className="flex flex-col text-white bg-gray-800 min-h-screen ">
-            <p>{fact}{console.log(endpointsImages)}</p>
-            <img src={endpointsImages[1]} alt="foto perro" />
-            <img src={fact} alt="foto perro" />
+            
+            <p>{console.log(imagenes)}</p>
+            <img src={imagenes[1]}/>
+            <img src={imagenes[2]}/>
             
             {/**Barra de navegación */}
             <nav className="flex flex-row justify-center py-3">
@@ -57,33 +75,33 @@ export function App(){
                         {/**Div que contiene películas (Grid) */}
                         <div className="grid grid-cols-3 grid-rows-3 gap-4">
                             <div className="bg-amber-200 border">
-                                c1
+                                <img src={imagenes[1]}/>
                             </div>
                             <div className="bg-amber-600 border">
-                                c2
+                                <img src={imagenes[2]}/>
                             </div>
                             <div className="bg-amber-900 border">
-                                c3
+                                <img src={imagenes[3]}/>
                             </div>
 
                             <div className="bg-blue-300 border">
-                                a1
+                                <img src={imagenes[4]}/>
                             </div>
                             <div className="bg-blue-500 border">
-                                a2
+                                <img src={imagenes[5]}/>
                             </div>
                             <div className="bg-blue-800 border">
-                                a3
+                                <img src={imagenes[6]}/>
                             </div>
 
                             <div className="bg-fuchsia-200 border">
-                                b1
+                                <img src={imagenes[7]}/>
                             </div>
                             <div className="bg-fuchsia-600 border">
-                                b2
+                                <img src={imagenes[8]}/>
                             </div>
                             <div className="bg-fuchsia-800 border">
-                                b3
+                                <img src={imagenes[9]}/>
                             </div>
                         </div>
                         <h2>Series</h2>
